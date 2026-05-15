@@ -20,21 +20,26 @@ export const metadata: Metadata = {
   description: 'Beautiful styles for your little princess. Professional kids hair salon offering braids, styling, treatments and more.',
   generator: 'v0.app',
   icons: {
-    icon: [
+    icon: '/favicon.png',
+    apple: '/favicon.png',
+  },
+  openGraph: {
+    title: 'Princess Parlor | Kids Hair Salon',
+    description: 'Beautiful styles for your little princess. Professional kids hair salon offering braids, styling, treatments and more.',
+    images: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Princess Parlor',
       },
     ],
-    apple: '/apple-icon.png',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Princess Parlor | Kids Hair Salon',
+    description: 'Beautiful styles for your little princess. Professional kids hair salon offering braids, styling, treatments and more.',
+    images: ['/og-image.jpg'],
   },
 }
 

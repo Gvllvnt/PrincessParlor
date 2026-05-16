@@ -179,9 +179,33 @@
     background-size: 22px 22px;
   }
 
+  .pattern-stars {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath fill='%23f472b6' fill-opacity='0.15' d='M20 4l2.5 7.5H30l-6 4.5 2.5 7.5-6.5-4.5-6.5 4.5 2.5-7.5-6-4.5h7.5z'/%3E%3C/svg%3E");
+    background-size: 48px 48px;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+
+  .animate-wiggle {
+    animation: wiggle 2.5s ease-in-out infinite;
+  }
+
   .card-rainbow {
     background: linear-gradient(white, white) padding-box,
       linear-gradient(135deg, var(--magic-pink), var(--magic-yellow), var(--magic-blue), var(--magic-purple)) border-box;
     border: 3px solid transparent;
   }
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
 }

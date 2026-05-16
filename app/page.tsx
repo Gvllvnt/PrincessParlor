@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { FloatingCartoon, SectionCartoons } from "@/components/cartoon-decorations"
 import { 
   Menu, 
   X, 
@@ -121,10 +122,10 @@ function Navigation() {
               alt="Princess Parlor"
               width={60}
               height={60}
-              className="rounded-full"
+              className="rounded-full ring-4 ring-magic-pink/40 ring-offset-2"
             />
             <span className="font-display text-xl font-semibold text-gradient-magic hidden sm:block">
-              Princess Parlor
+              Princess Parlor 👑
             </span>
           </Link>
 
@@ -197,7 +198,8 @@ function HeroSection() {
   const y = useTransform(scrollY, [0, 500], [0, 150])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-section-candy pattern-dots">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-section-candy pattern-dots pattern-stars">
+      <SectionCartoons variant="hero" />
       {/* Background decorations */}
       <motion.div style={{ y }} className="absolute inset-0 pointer-events-none">
         <motion.div className="absolute top-16 left-8 w-80 h-80 bg-magic-pink/25 rounded-full blur-3xl" />
@@ -238,7 +240,7 @@ function HeroSection() {
             className="inline-flex items-center gap-2 bg-white/80 border-2 border-magic-pink/30 rounded-full px-5 py-2 mb-6 shadow-md"
           >
             <Sparkles className="w-4 h-4 text-magic-yellow" />
-            <span className="text-sm font-semibold text-magic-purple">Welcome to the Magic</span>
+            <span className="text-sm font-semibold text-magic-purple">Welcome to the Magic ✨</span>
             <Sparkles className="w-4 h-4 text-magic-pink" />
           </motion.div>
 
@@ -315,10 +317,11 @@ function HeroSection() {
 function AboutSection() {
   return (
     <section id="about" className="py-24 bg-section-sunshine relative overflow-hidden">
+      <SectionCartoons variant="about" />
       <motion.div className="absolute top-0 right-0 w-96 h-96 bg-magic-yellow/25 rounded-full blur-3xl -translate-y-1/2" />
       <motion.div className="absolute bottom-0 left-0 w-72 h-72 bg-magic-mint/20 rounded-full blur-3xl" />
       
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -327,8 +330,10 @@ function AboutSection() {
           className="grid lg:grid-cols-2 gap-12 items-center"
         >
             <motion.div variants={fadeInUp} className="relative">
-            <motion.div className="absolute -top-4 -left-4 z-10 bg-magic-yellow text-amber-900 font-display font-semibold px-4 py-2 rounded-2xl shadow-lg rotate-[-6deg]">
-              So much fun!
+            <motion.div
+              className="absolute -top-4 -left-4 z-10 bg-magic-yellow text-amber-900 font-display font-semibold px-4 py-2 rounded-2xl shadow-lg rotate-[-6deg] animate-wiggle"
+            >
+              So much fun! 🎀
             </motion.div>
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl ring-4 ring-magic-pink/30">
               <Image
@@ -412,6 +417,7 @@ function ServicesSection() {
 
   return (
     <section id="services" className="py-24 bg-section-candy pattern-dots relative overflow-hidden">
+      <SectionCartoons variant="services" />
       <motion.div className="absolute top-10 left-0 w-64 h-64 bg-magic-blue/20 rounded-full blur-3xl" />
       <motion.div className="absolute bottom-10 right-0 w-80 h-80 bg-magic-pink/20 rounded-full blur-3xl" />
       
@@ -488,6 +494,7 @@ function HowItWorksSection() {
 
   return (
     <section id="how-it-works" className="py-24 bg-section-sunshine relative overflow-hidden">
+      <SectionCartoons variant="how-it-works" />
       <motion.div className="absolute -left-20 top-1/2 w-72 h-72 bg-magic-purple/15 rounded-full blur-3xl" />
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -541,7 +548,10 @@ function CtaBanner() {
     <section className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-magic-pink via-magic-purple to-magic-blue" />
       <motion.div className="absolute inset-0 pattern-dots opacity-30" />
-      <div className="container mx-auto px-4 relative z-10 text-center">
+      <FloatingCartoon type="star" className="absolute left-6 top-1/2 -translate-y-1/2 hidden md:block opacity-90" delay={0} size="md" wiggle />
+      <FloatingCartoon type="balloon" className="absolute right-8 top-1/4 hidden lg:block opacity-90" delay={0.5} size="sm" />
+      <FloatingCartoon type="crown" className="absolute right-12 bottom-1/4 hidden md:block opacity-90" delay={0.3} size="sm" />
+      <motion.div className="container mx-auto px-4 relative z-10 text-center">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -562,7 +572,7 @@ function CtaBanner() {
             </a>
           </Button>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   )
 }
@@ -673,7 +683,8 @@ function GallerySection() {
 
   return (
     <section id="gallery" className="py-24 bg-section-candy relative overflow-hidden">
-      <div className="container mx-auto px-4">
+      <SectionCartoons variant="gallery" />
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -758,8 +769,9 @@ function GallerySection() {
 // Contact Section
 function ContactSection() {
   return (
-    <section id="contact" className="py-24 bg-section-sunshine relative">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-24 bg-section-sunshine relative overflow-hidden">
+      <SectionCartoons variant="contact" />
+      <motion.div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -877,7 +889,7 @@ function ContactSection() {
             </motion.div>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   )
 }
@@ -885,8 +897,9 @@ function ContactSection() {
 // Footer
 function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-magic-purple via-magic-pink to-magic-coral text-white py-16">
-      <div className="container mx-auto px-4">
+    <footer className="relative bg-gradient-to-br from-magic-purple via-magic-pink to-magic-coral text-white py-16 overflow-hidden">
+      <SectionCartoons variant="footer" />
+      <motion.div className="container mx-auto px-4 relative z-10">
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
@@ -939,7 +952,7 @@ function Footer() {
             © {new Date().getFullYear()} Princess Parlor Kids Hair Salon. All rights reserved.
           </p>
         </div>
-      </div>
+      </motion.div>
     </footer>
   )
 }

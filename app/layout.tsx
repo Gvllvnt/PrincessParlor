@@ -1,8 +1,13 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Poppins } from 'next/font/google'
+import { Fredoka, Playfair_Display, Poppins } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
+const fredoka = Fredoka({
+  subsets: ["latin"],
+  variable: '--font-fredoka',
+  display: 'swap',
+});
 const playfair = Playfair_Display({ 
   subsets: ["latin"],
   variable: '--font-playfair',
@@ -49,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${poppins.variable}`}>
+    <html lang="en" className={`${fredoka.variable} ${playfair.variable} ${poppins.variable}`}>
       <body className="font-sans antialiased bg-background">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

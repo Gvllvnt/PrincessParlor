@@ -23,8 +23,23 @@ import {
   Wind,
   Crown,
   Flower2,
-  Gift
+  Gift,
+  MessageCircle,
+  Shield,
+  Smile,
+  Palette
 } from "lucide-react"
+
+const WHATSAPP_URL = "https://wa.me/27735368005"
+
+const serviceColors = [
+  "bg-magic-pink/15 text-magic-pink border-magic-pink/30",
+  "bg-magic-purple/15 text-magic-purple border-magic-purple/30",
+  "bg-magic-blue/15 text-magic-blue border-magic-blue/30",
+  "bg-magic-yellow/20 text-amber-700 border-magic-yellow/50",
+  "bg-magic-mint/20 text-emerald-700 border-magic-mint/40",
+  "bg-magic-coral/15 text-orange-600 border-magic-coral/30",
+]
 
 // Animation variants
 const fadeInUp = {
@@ -46,10 +61,10 @@ const scaleIn = {
 }
 
 // Sparkle component for decorative effect
-function FloatingSparkle({ delay = 0, x = 0, y = 0 }: { delay?: number; x?: number; y?: number }) {
+function FloatingSparkle({ delay = 0, x = 0, y = 0, color = "text-magic-pink" }: { delay?: number; x?: number; y?: number; color?: string }) {
   return (
     <motion.div
-      className="absolute text-primary/30"
+      className={`absolute ${color}`}
       style={{ left: `${x}%`, top: `${y}%` }}
       animate={{
         y: [0, -20, 0],
@@ -83,8 +98,8 @@ function Navigation() {
   const navLinks = [
     { href: "#about", label: "About" },
     { href: "#services", label: "Services" },
-    { href: "#pricing", label: "Pricing" },
     { href: "#gallery", label: "Gallery" },
+    { href: "#how-it-works", label: "How It Works" },
     { href: "#contact", label: "Contact" }
   ]
 
@@ -93,7 +108,9 @@ function Navigation() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-card/95 backdrop-blur-md shadow-lg" : "bg-transparent"
+        isScrolled
+          ? "bg-white/95 backdrop-blur-md shadow-lg shadow-magic-pink/10 border-b border-magic-pink/15"
+          : "bg-white/70 backdrop-blur-sm"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -106,7 +123,7 @@ function Navigation() {
               height={60}
               className="rounded-full"
             />
-            <span className="font-serif text-xl font-bold text-foreground hidden sm:block">
+            <span className="font-display text-xl font-semibold text-gradient-magic hidden sm:block">
               Princess Parlor
             </span>
           </Link>
@@ -117,13 +134,16 @@ function Navigation() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-foreground/80 hover:text-primary transition-colors text-sm font-medium"
+                className="text-foreground/80 hover:text-magic-purple font-medium transition-colors text-sm"
               >
                 {link.label}
               </Link>
             ))}
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6">
-              Book Appointment
+            <Button asChild className="bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full px-6 shadow-lg shadow-[#25D366]/30">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="mr-2 w-4 h-4" />
+                Book on WhatsApp
+              </a>
             </Button>
           </div>
 
@@ -157,8 +177,10 @@ function Navigation() {
                 </Link>
               ))}
               <div className="px-4 pt-2">
-                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full">
-                  Book Appointment
+                <Button asChild className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full">
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                    Book on WhatsApp
+                  </a>
                 </Button>
               </div>
             </div>
@@ -175,19 +197,21 @@ function HeroSection() {
   const y = useTransform(scrollY, [0, 500], [0, 150])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-secondary via-background to-background">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-section-candy pattern-dots">
       {/* Background decorations */}
-      <motion.div style={{ y }} className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+      <motion.div style={{ y }} className="absolute inset-0 pointer-events-none">
+        <motion.div className="absolute top-16 left-8 w-80 h-80 bg-magic-pink/25 rounded-full blur-3xl" />
+        <motion.div className="absolute top-32 right-12 w-72 h-72 bg-magic-yellow/30 rounded-full blur-3xl" />
+        <motion.div className="absolute bottom-24 left-1/4 w-96 h-96 bg-magic-blue/20 rounded-full blur-3xl" />
+        <motion.div className="absolute bottom-10 right-8 w-64 h-64 bg-magic-purple/25 rounded-full blur-3xl" />
       </motion.div>
 
       {/* Floating sparkles */}
-      <FloatingSparkle delay={0} x={10} y={20} />
-      <FloatingSparkle delay={0.5} x={85} y={15} />
-      <FloatingSparkle delay={1} x={20} y={70} />
-      <FloatingSparkle delay={1.5} x={75} y={60} />
-      <FloatingSparkle delay={2} x={50} y={30} />
+      <FloatingSparkle delay={0} x={10} y={20} color="text-magic-pink" />
+      <FloatingSparkle delay={0.5} x={85} y={15} color="text-magic-yellow" />
+      <FloatingSparkle delay={1} x={20} y={70} color="text-magic-blue" />
+      <FloatingSparkle delay={1.5} x={75} y={60} color="text-magic-purple" />
+      <FloatingSparkle delay={2} x={50} y={30} color="text-magic-coral" />
 
       <div className="container mx-auto px-4 pt-24 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
@@ -207,25 +231,34 @@ function HeroSection() {
             />
           </motion.div>
 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="inline-flex items-center gap-2 bg-white/80 border-2 border-magic-pink/30 rounded-full px-5 py-2 mb-6 shadow-md"
+          >
+            <Sparkles className="w-4 h-4 text-magic-yellow" />
+            <span className="text-sm font-semibold text-magic-purple">Welcome to the Magic</span>
+            <Sparkles className="w-4 h-4 text-magic-pink" />
+          </motion.div>
+
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6"
+            className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight"
           >
-            <span className="text-primary">Princess Parlor</span>
-            <br />
-            <span className="text-3xl md:text-4xl lg:text-5xl font-normal">Kids Hair Salon</span>
+            Making Haircuts{" "}
+            <span className="text-gradient-magic">Fun &amp; Stress-Free</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-foreground/75 mb-10 max-w-2xl mx-auto font-medium"
           >
-            Beautiful styles for your little princess. Where creativity meets care, 
-            and every child leaves feeling like royalty.
+            A premium, safe, and playful kids hair salon in Lambton. Because your little ones deserve a royal experience.
           </motion.p>
 
           <motion.div
@@ -234,20 +267,26 @@ function HeroSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button 
-              size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 py-6 text-lg shadow-lg shadow-primary/25"
+            <Button
+              asChild
+              size="lg"
+              className="bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full px-8 py-6 text-lg shadow-xl shadow-[#25D366]/35"
             >
-              <Crown className="mr-2 w-5 h-5" />
-              Book Appointment
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="mr-2 w-5 h-5" />
+                Book via WhatsApp
+              </a>
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="rounded-full px-8 py-6 text-lg border-primary/30 hover:bg-primary/5"
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="rounded-full px-8 py-6 text-lg border-2 border-magic-purple/40 bg-white/80 hover:bg-magic-purple/10 text-magic-purple font-semibold"
             >
-              <Heart className="mr-2 w-5 h-5" />
-              View Services
+              <a href="#gallery">
+                <Star className="mr-2 w-5 h-5" />
+                View Gallery
+              </a>
             </Button>
           </motion.div>
         </div>
@@ -263,9 +302,9 @@ function HeroSection() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-primary/30 rounded-full flex items-start justify-center p-1"
+          className="w-6 h-10 border-2 border-magic-pink/40 rounded-full flex items-start justify-center p-1"
         >
-          <motion.div className="w-1.5 h-3 bg-primary/50 rounded-full" />
+          <motion.div className="w-1.5 h-3 bg-magic-pink rounded-full" />
         </motion.div>
       </motion.div>
     </section>
@@ -275,8 +314,9 @@ function HeroSection() {
 // About Section
 function AboutSection() {
   return (
-    <section id="about" className="py-24 bg-background relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2" />
+    <section id="about" className="py-24 bg-section-sunshine relative overflow-hidden">
+      <motion.div className="absolute top-0 right-0 w-96 h-96 bg-magic-yellow/25 rounded-full blur-3xl -translate-y-1/2" />
+      <motion.div className="absolute bottom-0 left-0 w-72 h-72 bg-magic-mint/20 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4">
         <motion.div
@@ -286,8 +326,11 @@ function AboutSection() {
           variants={staggerContainer}
           className="grid lg:grid-cols-2 gap-12 items-center"
         >
-          <motion.div variants={fadeInUp} className="relative">
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+            <motion.div variants={fadeInUp} className="relative">
+            <motion.div className="absolute -top-4 -left-4 z-10 bg-magic-yellow text-amber-900 font-display font-semibold px-4 py-2 rounded-2xl shadow-lg rotate-[-6deg]">
+              So much fun!
+            </motion.div>
+            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl ring-4 ring-magic-pink/30">
               <Image
                 src="/images/about-photo.jpg"
                 alt="Happy child at Princess Parlor"
@@ -298,35 +341,30 @@ function AboutSection() {
           </motion.div>
 
           <motion.div variants={fadeInUp} className="lg:pl-8">
-            <span className="text-primary font-medium text-sm uppercase tracking-wider">
+            <span className="inline-block bg-magic-purple/15 text-magic-purple font-semibold text-sm uppercase tracking-wider px-4 py-1 rounded-full">
               About Us
             </span>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mt-2 mb-6">
-              Where Little Ones <span className="text-primary">Shine Bright</span>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mt-4 mb-6">
+              A Space Designed <span className="text-gradient-magic">Just For Kids</span>
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              At Princess Parlor, we believe every child deserves to feel like royalty. 
-              Our kid-friendly salon creates a magical experience where your little ones 
-              can relax, have fun, and leave with stunning hairstyles they&apos;ll love.
+            <p className="text-foreground/75 text-lg leading-relaxed mb-6">
+              We know haircuts can be scary for little ones. That&apos;s why we&apos;ve created a magical environment where kids feel safe, entertained, and happy — from our colorful play area to our gentle stylists.
             </p>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              Our professional stylists specialize in children&apos;s hair care, from gentle 
-              treatments to creative braids and protective styles. We focus on building 
-              confidence and making every visit a positive, memorable experience.
+            <p className="text-foreground/75 text-lg leading-relaxed mb-8">
+              Every detail is crafted for your peace of mind, so your little royals can relax, play, and leave with hairstyles they absolutely love.
             </p>
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-4">
               {[
-                { icon: Heart, label: "Kid-Friendly" },
-                { icon: Star, label: "Expert Stylists" },
-                { icon: Sparkles, label: "Creative Styles" },
-                { icon: Crown, label: "Royal Treatment" }
+                { icon: Shield, label: "Clean & Sanitized Environment", color: "bg-magic-mint/20 text-emerald-700 border-magic-mint/40" },
+                { icon: Heart, label: "Gentle, Patient Stylists", color: "bg-magic-pink/15 text-magic-pink border-magic-pink/30" },
+                { icon: Smile, label: "Fun Play Area While Waiting", color: "bg-magic-yellow/25 text-amber-800 border-magic-yellow/50" }
               ].map((item, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                    <item.icon className="w-5 h-5 text-primary" />
+                <div key={i} className={`flex items-center gap-4 p-4 rounded-2xl border-2 ${item.color} bg-white/70`}>
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${item.color}`}>
+                    <item.icon className="w-6 h-6" />
                   </div>
-                  <span className="font-medium text-foreground">{item.label}</span>
+                  <span className="font-semibold text-foreground">{item.label}</span>
                 </div>
               ))}
             </div>
@@ -342,18 +380,18 @@ function ServicesSection() {
   const services = [
     {
       icon: Scissors,
-      title: "Braids",
-      description: "Beautiful cornrows, box braids, twists and creative braiding styles for all hair types."
+      title: "Braiding & Cornrows",
+      description: "Beautiful, neat, and gentle protective styles for all hair types."
     },
     {
       icon: Wind,
-      title: "Wash & Blow",
-      description: "Gentle cleansing and blow-dry services using kid-safe, nourishing products."
+      title: "Wash & Blowdry",
+      description: "Tear-free washing with premium, kid-safe products and a gentle blowdry finish."
     },
     {
-      icon: Heart,
-      title: "Hair Treatments",
-      description: "Deep conditioning, detangling, and moisturizing treatments for healthy hair."
+      icon: Palette,
+      title: "Accessories Setup",
+      description: "Colorful beads, ribbons, and clips to complete the royal look."
     },
     {
       icon: Crown,
@@ -373,8 +411,9 @@ function ServicesSection() {
   ]
 
   return (
-    <section id="services" className="py-24 bg-secondary/30 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(244,114,182,0.08),transparent_50%)]" />
+    <section id="services" className="py-24 bg-section-candy pattern-dots relative overflow-hidden">
+      <motion.div className="absolute top-10 left-0 w-64 h-64 bg-magic-blue/20 rounded-full blur-3xl" />
+      <motion.div className="absolute bottom-10 right-0 w-80 h-80 bg-magic-pink/20 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -384,12 +423,15 @@ function ServicesSection() {
           variants={staggerContainer}
           className="text-center mb-16"
         >
-          <motion.span variants={fadeInUp} className="text-primary font-medium text-sm uppercase tracking-wider">
+          <motion.span variants={fadeInUp} className="inline-block bg-magic-pink/15 text-magic-pink font-semibold text-sm uppercase tracking-wider px-4 py-1 rounded-full">
             Our Services
           </motion.span>
-          <motion.h2 variants={fadeInUp} className="font-serif text-4xl md:text-5xl font-bold text-foreground mt-2">
-            What We <span className="text-primary">Offer</span>
+          <motion.h2 variants={fadeInUp} className="font-display text-4xl md:text-5xl font-bold text-foreground mt-4">
+            Expert Styling, <span className="text-gradient-magic">Big Smiles</span>
           </motion.h2>
+          <motion.p variants={fadeInUp} className="text-foreground/70 mt-4 max-w-2xl mx-auto text-lg">
+            Expert styling tailored for children&apos;s delicate hair in a fun, colorful environment.
+          </motion.p>
         </motion.div>
 
         <motion.div
@@ -401,17 +443,124 @@ function ServicesSection() {
         >
           {services.map((service, i) => (
             <motion.div key={i} variants={scaleIn}>
-              <Card className="bg-card border-border/50 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 group h-full">
+              <Card className={`card-rainbow bg-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group h-full rounded-3xl`}>
                 <CardContent className="p-6">
-                  <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <service.icon className="w-7 h-7 text-primary" />
+                  <div className={`w-14 h-14 rounded-2xl border-2 flex items-center justify-center mb-4 ${serviceColors[i % serviceColors.length]}`}>
+                    <service.icon className="w-7 h-7" />
                   </div>
-                  <h3 className="font-serif text-xl font-bold text-foreground mb-2">{service.title}</h3>
-                  <p className="text-muted-foreground">{service.description}</p>
+                  <h3 className="font-display text-xl font-bold text-foreground mb-2">{service.title}</h3>
+                  <p className="text-foreground/70">{service.description}</p>
                 </CardContent>
               </Card>
             </motion.div>
           ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// How It Works Section
+function HowItWorksSection() {
+  const steps = [
+    {
+      step: "1",
+      title: "Book Appointment",
+      description: "Message us on WhatsApp to secure your preferred slot easily.",
+      icon: MessageCircle,
+      color: "from-magic-pink to-magic-purple",
+    },
+    {
+      step: "2",
+      title: "Arrive & Play",
+      description: "Come in and let your child enjoy our clean, safe play area.",
+      icon: Smile,
+      color: "from-magic-yellow to-magic-coral",
+    },
+    {
+      step: "3",
+      title: "Royal Treatment",
+      description: "Our gentle stylists work their magic while your child relaxes.",
+      icon: Crown,
+      color: "from-magic-blue to-magic-mint",
+    },
+  ]
+
+  return (
+    <section id="how-it-works" className="py-24 bg-section-sunshine relative overflow-hidden">
+      <motion.div className="absolute -left-20 top-1/2 w-72 h-72 bg-magic-purple/15 rounded-full blur-3xl" />
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="text-center mb-16"
+        >
+          <motion.span variants={fadeInUp} className="inline-block bg-magic-blue/15 text-sky-700 font-semibold text-sm uppercase tracking-wider px-4 py-1 rounded-full">
+            How It Works
+          </motion.span>
+          <motion.h2 variants={fadeInUp} className="font-display text-4xl md:text-5xl font-bold text-foreground mt-4">
+            Three Simple <span className="text-gradient-magic">Steps</span>
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="text-foreground/70 mt-4 max-w-xl mx-auto text-lg">
+            A stress-free salon experience from booking to beautiful hair.
+          </motion.p>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto"
+        >
+          {steps.map((item, i) => (
+            <motion.div key={i} variants={scaleIn}>
+              <Card className="bg-white/90 border-2 border-white shadow-xl rounded-3xl h-full overflow-hidden">
+                <CardContent className="p-8 text-center">
+                  <div className={`w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white shadow-lg`}>
+                    <item.icon className="w-8 h-8" />
+                  </div>
+                  <span className="inline-block font-display text-5xl font-bold text-magic-pink/30 mb-2">{item.step}</span>
+                  <h3 className="font-display text-2xl font-bold text-foreground mb-3">{item.title}</h3>
+                  <p className="text-foreground/70">{item.description}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// CTA Banner
+function CtaBanner() {
+  return (
+    <section className="py-20 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-r from-magic-pink via-magic-purple to-magic-blue" />
+      <motion.div className="absolute inset-0 pattern-dots opacity-30" />
+      <div className="container mx-auto px-4 relative z-10 text-center">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+        >
+          <Sparkles className="w-10 h-10 text-magic-yellow mx-auto mb-4" />
+          <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">
+            Ready for a Stress-Free Haircut?
+          </h2>
+          <p className="text-white/90 text-lg max-w-2xl mx-auto mb-8">
+            Join the many parents who trust Princess Parlor for their children&apos;s hair. Book your visit today!
+          </p>
+          <Button asChild size="lg" className="bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full px-10 py-6 text-lg shadow-xl">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+              <MessageCircle className="mr-2 w-5 h-5" />
+              Book Now on WhatsApp
+            </a>
+          </Button>
         </motion.div>
       </div>
     </section>
@@ -440,7 +589,7 @@ function PricingSection() {
   ]
 
   return (
-    <section id="pricing" className="py-24 bg-background">
+    <section id="pricing" className="py-24 bg-white/60 relative">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -449,11 +598,11 @@ function PricingSection() {
           variants={staggerContainer}
           className="text-center mb-16"
         >
-          <motion.span variants={fadeInUp} className="text-primary font-medium text-sm uppercase tracking-wider">
+          <motion.span variants={fadeInUp} className="inline-block bg-magic-yellow/30 text-amber-800 font-semibold text-sm uppercase tracking-wider px-4 py-1 rounded-full">
             Pricing
           </motion.span>
-          <motion.h2 variants={fadeInUp} className="font-serif text-4xl md:text-5xl font-bold text-foreground mt-2">
-            Our <span className="text-primary">Packages</span>
+          <motion.h2 variants={fadeInUp} className="font-display text-4xl md:text-5xl font-bold text-foreground mt-4">
+            Our <span className="text-gradient-magic">Packages</span>
           </motion.h2>
         </motion.div>
 
@@ -466,20 +615,20 @@ function PricingSection() {
         >
           {packages.map((pkg, i) => (
             <motion.div key={i} variants={scaleIn}>
-              <Card className={`relative h-full transition-all duration-300 hover:shadow-xl ${
+              <Card className={`relative h-full transition-all duration-300 hover:shadow-xl rounded-3xl ${
                 pkg.popular 
-                  ? "border-primary shadow-lg shadow-primary/10 scale-105" 
-                  : "border-border/50"
+                  ? "card-rainbow scale-105 shadow-xl" 
+                  : "border-2 border-magic-pink/20 bg-white"
               }`}>
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <span className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-medium">
-                      Popular
+                    <span className="bg-gradient-to-r from-magic-pink to-magic-purple text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md">
+                      Most Popular
                     </span>
                   </div>
                 )}
                 <CardContent className="p-8 text-center">
-                  <h3 className="font-serif text-2xl font-bold text-foreground mb-2">{pkg.name}</h3>
+                  <h3 className="font-display text-2xl font-bold text-foreground mb-2">{pkg.name}</h3>
                   <p className="text-primary text-lg font-medium mb-6">{pkg.price}</p>
                   <ul className="space-y-3 mb-8">
                     {pkg.features.map((feature, j) => (
@@ -489,14 +638,17 @@ function PricingSection() {
                       </li>
                     ))}
                   </ul>
-                  <Button 
-                    className={`w-full rounded-full ${
-                      pkg.popular 
-                        ? "bg-primary hover:bg-primary/90 text-primary-foreground" 
-                        : "bg-secondary hover:bg-secondary/80 text-secondary-foreground"
+                  <Button
+                    asChild
+                    className={`w-full rounded-full font-semibold ${
+                      pkg.popular
+                        ? "bg-[#25D366] hover:bg-[#20bd5a] text-white"
+                        : "bg-magic-purple hover:bg-magic-purple/90 text-white"
                     }`}
                   >
-                    Book Now
+                    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                      Book Now
+                    </a>
                   </Button>
                 </CardContent>
               </Card>
@@ -520,7 +672,7 @@ function GallerySection() {
   ]
 
   return (
-    <section id="gallery" className="py-24 bg-secondary/30">
+    <section id="gallery" className="py-24 bg-section-candy relative overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -529,14 +681,14 @@ function GallerySection() {
           variants={staggerContainer}
           className="text-center mb-16"
         >
-          <motion.span variants={fadeInUp} className="text-primary font-medium text-sm uppercase tracking-wider">
-            Our Work
+          <motion.span variants={fadeInUp} className="inline-block bg-magic-coral/15 text-orange-600 font-semibold text-sm uppercase tracking-wider px-4 py-1 rounded-full">
+            Happy Smiles
           </motion.span>
-          <motion.h2 variants={fadeInUp} className="font-serif text-4xl md:text-5xl font-bold text-foreground mt-2">
-            Style <span className="text-primary">Gallery</span>
+          <motion.h2 variants={fadeInUp} className="font-display text-4xl md:text-5xl font-bold text-foreground mt-4">
+            Little <span className="text-gradient-magic">Royals</span>
           </motion.h2>
-          <motion.p variants={fadeInUp} className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Browse our collection of beautiful hairstyles created with love for our little princesses
+          <motion.p variants={fadeInUp} className="text-foreground/70 mt-4 max-w-2xl mx-auto text-lg">
+            Take a peek at some of our little royals and their stunning transformations.
           </motion.p>
         </motion.div>
 
@@ -551,7 +703,7 @@ function GallerySection() {
             <motion.div
               key={i}
               variants={scaleIn}
-              className={`relative overflow-hidden rounded-2xl group cursor-pointer ${image.span}`}
+              className={`relative overflow-hidden rounded-3xl group cursor-pointer ring-4 ring-white shadow-xl hover:ring-magic-pink/50 transition-all ${image.span}`}
               onClick={() => setSelectedImage(image.src)}
             >
               <Image
@@ -606,7 +758,7 @@ function GallerySection() {
 // Contact Section
 function ContactSection() {
   return (
-    <section id="contact" className="py-24 bg-secondary/30">
+    <section id="contact" className="py-24 bg-section-sunshine relative">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -615,19 +767,19 @@ function ContactSection() {
           variants={staggerContainer}
         >
           <div className="text-center mb-16">
-            <motion.span variants={fadeInUp} className="text-primary font-medium text-sm uppercase tracking-wider">
+            <motion.span variants={fadeInUp} className="inline-block bg-magic-mint/20 text-emerald-700 font-semibold text-sm uppercase tracking-wider px-4 py-1 rounded-full">
               Contact Us
             </motion.span>
-            <motion.h2 variants={fadeInUp} className="font-serif text-4xl md:text-5xl font-bold text-foreground mt-2">
-              Get In <span className="text-primary">Touch</span>
+            <motion.h2 variants={fadeInUp} className="font-display text-4xl md:text-5xl font-bold text-foreground mt-4">
+              Get In <span className="text-gradient-magic">Touch</span>
             </motion.h2>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             <motion.div variants={fadeInUp}>
-              <Card className="bg-card border-border/50 h-full">
+              <Card className="bg-white border-2 border-magic-pink/20 shadow-xl rounded-3xl h-full">
                 <CardContent className="p-8">
-                  <h3 className="font-serif text-2xl font-bold text-foreground mb-6">Send Us a Message</h3>
+                  <h3 className="font-display text-2xl font-bold text-foreground mb-6">Send Us a Message</h3>
                   <form className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <Input placeholder="First Name" className="rounded-xl" />
@@ -636,8 +788,11 @@ function ContactSection() {
                     <Input type="email" placeholder="Email Address" className="rounded-xl" />
                     <Input type="tel" placeholder="Phone Number" className="rounded-xl" />
                     <Textarea placeholder="Your Message" rows={4} className="rounded-xl" />
-                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full">
-                      Send Message
+                    <Button asChild className="w-full bg-magic-purple hover:bg-magic-purple/90 text-white rounded-full font-semibold">
+                      <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                        <MessageCircle className="mr-2 w-4 h-4" />
+                        Chat on WhatsApp
+                      </a>
                     </Button>
                   </form>
                 </CardContent>
@@ -645,11 +800,11 @@ function ContactSection() {
             </motion.div>
 
             <motion.div variants={fadeInUp} className="space-y-6">
-              <Card className="bg-card border-border/50">
+              <Card className="bg-white border-2 border-magic-blue/20 rounded-2xl shadow-md">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                      <MapPin className="w-5 h-5 text-primary" />
+                    <div className="w-12 h-12 bg-magic-blue/15 rounded-xl flex items-center justify-center shrink-0">
+                      <MapPin className="w-5 h-5 text-sky-600" />
                     </div>
                     <div>
                       <h4 className="font-medium text-foreground mb-1">Address</h4>
@@ -666,11 +821,11 @@ function ContactSection() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-card border-border/50">
+              <Card className="bg-white border-2 border-magic-pink/20 rounded-2xl shadow-md">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                      <Phone className="w-5 h-5 text-primary" />
+                    <div className="w-12 h-12 bg-magic-pink/15 rounded-xl flex items-center justify-center shrink-0">
+                      <Phone className="w-5 h-5 text-magic-pink" />
                     </div>
                     <div>
                       <h4 className="font-medium text-foreground mb-1">Phone</h4>
@@ -691,11 +846,11 @@ function ContactSection() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-card border-border/50">
+              <Card className="bg-white border-2 border-magic-yellow/40 rounded-2xl shadow-md">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                      <Clock className="w-5 h-5 text-primary" />
+                    <div className="w-12 h-12 bg-magic-yellow/25 rounded-xl flex items-center justify-center shrink-0">
+                      <Clock className="w-5 h-5 text-amber-700" />
                     </div>
                     <div>
                       <h4 className="font-medium text-foreground mb-1">Business Hours</h4>
@@ -705,7 +860,7 @@ function ContactSection() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-card border-border/50 overflow-hidden">
+              <Card className="bg-white border-2 border-magic-purple/20 rounded-2xl shadow-md overflow-hidden">
                 <CardContent className="p-0">
                   <div className="relative aspect-video w-full">
                     <iframe
@@ -730,7 +885,7 @@ function ContactSection() {
 // Footer
 function Footer() {
   return (
-    <footer className="bg-foreground text-background py-16">
+    <footer className="bg-gradient-to-br from-magic-purple via-magic-pink to-magic-coral text-white py-16">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div className="md:col-span-2">
@@ -743,11 +898,11 @@ function Footer() {
                 className="rounded-full"
               />
               <div>
-                <h3 className="font-serif text-xl font-bold">Princess Parlor</h3>
-                <p className="text-background/60 text-sm">Kids Hair Salon</p>
+                <h3 className="font-display text-xl font-bold">Princess Parlor</h3>
+                <p className="text-white/80 text-sm">Kids Hair Salon</p>
               </div>
             </div>
-            <p className="text-background/70 max-w-md">
+            <p className="text-white/85 max-w-md">
               Where every child leaves feeling like royalty. Professional hair styling 
               in a fun, kid-friendly environment.
             </p>
@@ -758,7 +913,7 @@ function Footer() {
             <ul className="space-y-2">
               {["About", "Services", "Pricing", "Gallery", "Contact"].map((link) => (
                 <li key={link}>
-                  <Link href={`#${link.toLowerCase()}`} className="text-background/70 hover:text-primary transition-colors">
+                  <Link href={`#${link.toLowerCase()}`} className="text-white/80 hover:text-magic-yellow transition-colors">
                     {link}
                   </Link>
                 </li>
@@ -769,18 +924,18 @@ function Footer() {
           <div>
             <h4 className="font-medium text-lg mb-4">Follow Us</h4>
             <div className="flex gap-4">
-              <Link href="#" className="w-10 h-10 bg-background/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <Link href="#" className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/40 transition-colors">
                 <Instagram className="w-5 h-5" />
               </Link>
-              <Link href="#" className="w-10 h-10 bg-background/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <Link href="#" className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/40 transition-colors">
                 <Facebook className="w-5 h-5" />
               </Link>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-background/10 pt-8 text-center">
-          <p className="text-background/60 text-sm">
+        <div className="border-t border-white/20 pt-8 text-center">
+          <p className="text-white/70 text-sm">
             © {new Date().getFullYear()} Princess Parlor Kids Hair Salon. All rights reserved.
           </p>
         </div>
@@ -797,8 +952,10 @@ export default function PrincessParlorPage() {
       <HeroSection />
       <AboutSection />
       <ServicesSection />
-      <PricingSection />
       <GallerySection />
+      <HowItWorksSection />
+      <CtaBanner />
+      <PricingSection />
       <ContactSection />
       <Footer />
     </main>

@@ -4,25 +4,31 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.99 0.005 350);
-  --foreground: oklch(0.15 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0 0);
+  --background: oklch(0.99 0.02 330);
+  --foreground: oklch(0.28 0.06 300);
+  --card: oklch(1 0.01 330);
+  --card-foreground: oklch(0.28 0.06 300);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.7 0.15 350);
+  --popover-foreground: oklch(0.28 0.06 300);
+  --primary: oklch(0.68 0.22 350);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.97 0.01 350);
-  --secondary-foreground: oklch(0.15 0 0);
-  --muted: oklch(0.96 0.01 350);
-  --muted-foreground: oklch(0.45 0 0);
-  --accent: oklch(0.82 0.12 85);
-  --accent-foreground: oklch(0.15 0 0);
+  --secondary: oklch(0.94 0.06 85);
+  --secondary-foreground: oklch(0.35 0.08 300);
+  --muted: oklch(0.96 0.04 330);
+  --muted-foreground: oklch(0.48 0.04 300);
+  --accent: oklch(0.78 0.16 85);
+  --accent-foreground: oklch(0.28 0.06 300);
+  --magic-pink: oklch(0.72 0.22 350);
+  --magic-purple: oklch(0.62 0.2 300);
+  --magic-yellow: oklch(0.88 0.14 85);
+  --magic-blue: oklch(0.78 0.14 230);
+  --magic-mint: oklch(0.82 0.12 155);
+  --magic-coral: oklch(0.72 0.16 25);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.9 0.02 350);
-  --input: oklch(0.92 0.01 350);
-  --ring: oklch(0.7 0.15 350);
+  --border: oklch(0.9 0.05 330);
+  --input: oklch(0.94 0.03 330);
+  --ring: oklch(0.68 0.22 350);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -77,6 +83,13 @@
 @theme inline {
   --font-sans: var(--font-poppins), 'Poppins', sans-serif;
   --font-serif: var(--font-playfair), 'Playfair Display', serif;
+  --font-display: var(--font-fredoka), 'Fredoka', sans-serif;
+  --color-magic-pink: var(--magic-pink);
+  --color-magic-purple: var(--magic-purple);
+  --color-magic-yellow: var(--magic-yellow);
+  --color-magic-blue: var(--magic-blue);
+  --color-magic-mint: var(--magic-mint);
+  --color-magic-coral: var(--magic-coral);
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -122,5 +135,53 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(circle at 0% 0%, oklch(0.94 0.08 350 / 0.5) 0%, transparent 40%),
+      radial-gradient(circle at 100% 20%, oklch(0.94 0.08 85 / 0.45) 0%, transparent 35%),
+      radial-gradient(circle at 50% 100%, oklch(0.94 0.06 230 / 0.35) 0%, transparent 45%);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .text-gradient-magic {
+    background: linear-gradient(
+      120deg,
+      var(--magic-pink) 0%,
+      var(--magic-purple) 45%,
+      var(--magic-coral) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-section-candy {
+    background:
+      radial-gradient(circle at 10% 20%, oklch(0.92 0.1 350 / 0.35) 0%, transparent 45%),
+      radial-gradient(circle at 90% 10%, oklch(0.92 0.1 85 / 0.35) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, oklch(0.92 0.08 230 / 0.3) 0%, transparent 45%),
+      oklch(0.99 0.02 330);
+  }
+
+  .bg-section-sunshine {
+    background:
+      radial-gradient(circle at 15% 85%, oklch(0.9 0.12 155 / 0.35) 0%, transparent 40%),
+      radial-gradient(circle at 85% 30%, oklch(0.92 0.1 350 / 0.3) 0%, transparent 45%),
+      oklch(0.97 0.05 85);
+  }
+
+  .pattern-dots {
+    background-image: radial-gradient(oklch(0.68 0.22 350 / 0.12) 1.5px, transparent 1.5px);
+    background-size: 22px 22px;
+  }
+
+  .card-rainbow {
+    background: linear-gradient(white, white) padding-box,
+      linear-gradient(135deg, var(--magic-pink), var(--magic-yellow), var(--magic-blue), var(--magic-purple)) border-box;
+    border: 3px solid transparent;
   }
 }

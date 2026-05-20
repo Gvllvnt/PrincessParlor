@@ -678,7 +678,14 @@ function GallerySection() {
     { src: "/images/gallery-1.jpg", alt: "Happy child with beaded braids at Princess Parlor", span: "col-span-2 row-span-2" },
     { src: "/images/gallery-2.jpg", alt: "Cornrow braids with yellow bow", span: "col-span-1 row-span-1" },
     { src: "/images/gallery-3.jpg", alt: "French braids with pink bow", span: "col-span-1 row-span-1" },
-    { src: "/images/gallery-4.jpg", alt: "Cornrow pattern with beaded accent and yellow bow", span: "col-span-2 row-span-1" }
+    { src: "/images/gallery-4.jpg", alt: "Cornrow pattern with beaded accent and yellow bow", span: "col-span-2 row-span-2" },
+    {src: "/images/gallery-5.jpeg", alt: "Happy child with beaded braids at Princess Parlor", span: "col-span-3 row-span-3" },
+    {src: "/images/gallery-6.jpeg", alt: "Playground", span: "col-span-4 row-span-4" },
+    {src: "/images/gallery-7.jpeg", alt: "Playground", span: "col-span-5 row-span-5" },
+    {src: "/images/gallery-8.jpeg", alt: "Playground", span: "col-span-6 row-span-6" },
+    {src: "/images/gallery-9.jpeg", alt: "Happy child in Playground", span: "col-span-7 row-span-7" },
+    {src: "/images/gallery-10.jpeg", alt: "Happy child in Playground", span: "col-span-8 row-span-8" },
+    {src: "/images/gallery-11.jpeg", alt: "Playground", span: "col-span-9 row-span-9" },
   ]
 
   return (

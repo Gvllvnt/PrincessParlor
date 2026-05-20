@@ -683,7 +683,7 @@ function GallerySection() {
     {src: "/images/gallery-6.jpeg", alt: "Playground", span: "col-span-4 row-span-4" },
     {src: "/images/gallery-7.jpeg", alt: "Playground", span: "col-span-5 row-span-5" },
     {src: "/images/gallery-8.jpeg", alt: "Playground", span: "col-span-6 row-span-6" },
-    {src: "/images/gallery-9.jpeg", alt: "Happy child in Playground", span: "col-span-7 row-span-7" },
+    {src: "/images/gallery-9.jpeg", alt: "Playground", span: "col-span-7 row-span-7" },
     {src: "/images/gallery-10.jpeg", alt: "Happy child in Playground", span: "col-span-8 row-span-8" },
     {src: "/images/gallery-11.jpeg", alt: "Playground", span: "col-span-9 row-span-9" },
   ]
